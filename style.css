@@ -1,0 +1,68 @@
+/* HEADER */
+
+header
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(211, 211, 211, 0.11);
+}
+
+a
+{
+	text-decoration: none;
+}
+
+h1
+{
+	color: #81C4DF;
+	font-family: 'Caveat', cursive;
+}
+
+nav li
+{
+	display: flex;
+	list-style-type: none;
+    padding: 20px 15px;
+}
+
+nav ul
+{
+	padding-left: 20px;
+}
+
+nav a
+{
+    font-size: 1em;
+    color: #181818;
+    text-decoration: none;
+    padding-bottom: 3px;
+}
+
+nav a:hover
+{
+    color: #81C4DF;
+}
+
+
+/* BANNER */
+
+
+#banner img
+{
+	width: 90%;
+	padding: 0% 5%;
+}
+
+
+/* SECTION */
+
+
+section
+{
+	width: 90%;
+	height: 1500px;
+	margin: 0% 5%;
+	border: solid 1px black;
+	
+}
