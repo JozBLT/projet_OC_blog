@@ -1,5 +1,5 @@
-<? php
-require_once('config/functions.php')
+<?php
+require_once('config/functions.php');
 
 $chapters = getChapters();
 ?>
@@ -26,7 +26,7 @@ $chapters = getChapters();
                 
             <nav>
                 <li>
-                    <ul><a href="index.html"><i class="fas fa-home"></i></a></ul>
+                    <ul><a href="index.php"><i class="fas fa-home"></i></a></ul>
                     <ul><a href="index.php?action=all_chapters">Chapitres</a></ul>
                     <ul><a href="index.php?action=about">About</a></ul>
                     <ul><a href="index.php?action=contact">Contact</a></ul>
@@ -40,11 +40,11 @@ $chapters = getChapters();
 
         <section>
 
-            <? php foreach ($chapters as $chapter): ?>
-                <h2><?= $chapters->chapter_name ?></h2>
-            <a href="chapitre.php?id=<?= $chapter->id ?>">Lire la suite</a>
-            <? php endforeach; ?>
-
+            <?php foreach($chapters as $value): ?>
+                <h2><?= $value->chapter_name ?></h2>
+            <a href="chapitre.php?id=<?= $value->id ?>">Lire la suite</a>
+            <?php endforeach; ?>
+            
         </section>
 
     </body>
