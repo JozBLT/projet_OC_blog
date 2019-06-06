@@ -1,7 +1,6 @@
 <?php
 
-// fonction pour récupérer tous les chapitres
-
+// fonction pour récupérer le titre et l'id es chapitres
 function getChapters()
 {
 	require('config/connect.php');
@@ -10,4 +9,21 @@ function getChapters()
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
 	$req->closeCursor();
+}
+
+// fonction qui récupère un article
+function getOneChapter($id)
+{
+	require('config/connect.php');
+	$req = $bdd->prepare('SELECT * FROM chapters WHERE id = ?');
+	$req->execute(array($id));
+	if($req->rowcount() == 1)
+	{
+		$data = $req->fetch(PDO::FETCH_OBJ);
+		return $data;
+	}
+	else
+	{
+		header('location: index.php');
+	}
 }
