@@ -17,7 +17,7 @@ function getOneChapter($id)
 	require('config/connect.php');
 	$req = $bdd->prepare('SELECT * FROM chapters WHERE id = ?');
 	$req->execute(array($id));
-	if($req->rowcount() == 1)
+	if ($req->rowcount() == 1)
 	{
 		$data = $req->fetch(PDO::FETCH_OBJ);
 		return $data;
@@ -26,4 +26,14 @@ function getOneChapter($id)
 	{
 		header('location: index.php');
 	}
+	$req->closeCursor();
+}
+
+// fonction pour commenter un chapitre
+function addComment($chapterId, $author, $comment)
+{
+	require('config/connect.php');
+	$req = $bdd->prepare('INSERT into comments (chapterId, author, comment, date) VALUES (?, ?, ?, NOW())');
+	$req->execute(array($chapterId, $author, $comment));
+	$req->closeCursor();
 }

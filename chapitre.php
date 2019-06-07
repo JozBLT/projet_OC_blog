@@ -9,6 +9,31 @@ else
 
 	require_once('config/functions.php');
 
+	if (!empty($_POST))
+	{
+		extract($_POST);
+		$errors = array();
+
+		$author = strip_tags($author);
+		$comment = strip_tags($comment);
+
+		if (empty($author))
+			array_push($errors, 'Veuillez préciser un pseudo');
+
+		if (empty($comment))
+			array_push($errors, 'Veuillez entrer un commentaire');
+
+		if (count($errors) == 0)
+		{
+			$comment = addComment($id, $author, $comment);
+
+			$success = 'Votre commentaire a bien été publié';
+
+			unset($author);
+			unset($comment);
+		}
+	}
+
 	$chapter = getOneChapter($id);
 }
 ?>
@@ -35,15 +60,28 @@ else
 			<time><?= $chapter->chapter_date ?></time>
 			<hr />
 
-			<form action="chapitre.php?id=<?= $chapter->id ?>" methode="post">
+			<?php
+			if (isset($success))
+				echo $success;
+
+			if (!empty($errors)):?>
+
+				<?php foreach($errors as $error): ?>
+					<p><?= $error ?></p>
+				<?php endforeach; ?>
+
+			<?php endif; ?>
+
+			<form action="chapitre.php?id=<?= $chapter->id ?>" method="post">
 				<p>
 					<label for="author">Pseudo :</label><br/>
 					<input type="text" name="author" id="author" />
 				</p>
 				<p>
-					<label for="comment">Commentaire</label><br/>
+					<label for="comment">Commentaire :</label><br/>
 					<textarea name="comment" id="comment" cols="30" rows="8"></textarea>
 				</p>
+				<button type="submit">Envoyer</button>
 			</form>
 
 		</section>
