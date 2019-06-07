@@ -22,15 +22,30 @@ else
         <link rel="stylesheet" href="style.css" />
         <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-		<title><?php $chapter->chapter_name ?></title>
+		<title><?= $chapter->chapter_name ?></title>
 	</head>
 
-	<?php include('header.php'); ?>
-
 	<body>
+
+		<?php include('header.php'); ?>
+
 		<section>
-			<h1><?php $chapter->chapter_name ?></h1>
-			<p><?php $chapter->chapter_text ?></p>
+			<h1><?= $chapter->chapter_name ?></h1>
+			<p><?= $chapter->chapter_text ?></p><br/>
+			<time><?= $chapter->chapter_date ?></time>
+			<hr />
+
+			<form action="chapitre.php?id=<?= $chapter->id ?>" methode="post">
+				<p>
+					<label for="author">Pseudo :</label><br/>
+					<input type="text" name="author" id="author" />
+				</p>
+				<p>
+					<label for="comment">Commentaire</label><br/>
+					<textarea name="comment" id="comment" cols="30" rows="8"></textarea>
+				</p>
+			</form>
+
 		</section>
 	</body>
 	

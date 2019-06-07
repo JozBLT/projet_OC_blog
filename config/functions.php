@@ -1,10 +1,10 @@
 <?php
 
 // fonction pour récupérer le titre et l'id es chapitres
-function getChapters()
+function getChaptersInfo()
 {
 	require('config/connect.php');
-	$req = $bdd->prepare('SELECT id, chapter_name FROM chapters ORDER BY id DESC');
+	$req = $bdd->prepare('SELECT id, chapter_name, chapter_date FROM chapters ORDER BY id DESC');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
