@@ -29,11 +29,22 @@ function getOneChapter($id)
 	$req->closeCursor();
 }
 
-// fonction pour commenter un chapitre
+// fonction pour insérer un commentaire dans la BDD
 function addComment($chapterId, $author, $comment)
 {
 	require('config/connect.php');
 	$req = $bdd->prepare('INSERT into comments (chapterId, author, comment, date) VALUES (?, ?, ?, NOW())');
 	$req->execute(array($chapterId, $author, $comment));
+	$req->closeCursor();
+}
+
+// fonctions qui récupère les commentaires d'un chapitre
+function getComments($id)
+{
+	require('config/connect.php');
+	$req = $bdd->prepare('SELECT * FROM comments WHERE chapterId = ?');
+	$req->execute(array($id));
+	$data = $req->fetchAll(PDO::FETCH_OBJ);
+	return $data;
 	$req->closeCursor();
 }

@@ -35,6 +35,7 @@ else
 	}
 
 	$chapter = getOneChapter($id);
+	$comments = getComments($id);
 }
 ?>
 
@@ -75,14 +76,22 @@ else
 			<form action="chapitre.php?id=<?= $chapter->id ?>" method="post">
 				<p>
 					<label for="author">Pseudo :</label><br/>
-					<input type="text" name="author" id="author" />
+					<input type="text" name="author" id="author" value="<?php if(isset($author)) echo $author ?>" />
 				</p>
 				<p>
 					<label for="comment">Commentaire :</label><br/>
-					<textarea name="comment" id="comment" cols="30" rows="8"></textarea>
+					<textarea name="comment" id="comment" cols="30" rows="8"><?php if(isset($comment)) echo $comment ?></textarea>
 				</p>
 				<button type="submit">Envoyer</button>
 			</form>
+
+			<h2>Commentaires</h2>
+
+			<?php foreach($comments as $com): ?>
+				<h3><?= $com->author ?></h3>
+				<p><?= $com->comment ?></p>
+				<time><?= $com->date ?></time>
+			<?php endforeach; ?>
 
 		</section>
 	</body>
