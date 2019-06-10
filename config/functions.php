@@ -1,7 +1,7 @@
 <?php
 
-// fonction pour récupérer le titre et l'id des chapitres
-function getChaptersInfo()
+// fonction pour récupérer le titre et la date des chapitres par ordre décroissant
+function getChaptersInfoDesc()
 {
 	require('config/connect.php');
 	$req = $bdd->prepare('SELECT id, chapter_name, chapter_date FROM chapters ORDER BY id DESC');
@@ -11,7 +11,18 @@ function getChaptersInfo()
 	$req->closeCursor();
 }
 
-// fonction qui récupère un article grâce à son id
+// fonction pour récupérer le titre et la date des chapitres par ordre croissant
+function getChaptersInfo()
+{
+	require('config/connect.php');
+	$req = $bdd->prepare('SELECT id, chapter_name, chapter_date FROM chapters ORDER BY id');
+	$req->execute();
+	$data = $req->fetchAll(PDO::FETCH_OBJ);
+	return $data;
+	$req->closeCursor();
+}
+
+// fonction qui récupère un chapitre grâce à son id
 function getOneChapter($id)
 {
 	require('config/connect.php');

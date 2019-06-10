@@ -1,7 +1,7 @@
 <?php
 require_once('config/functions.php');
 
-$chapters = getChaptersInfo();
+$chapters = getChaptersInfoDesc();
 ?>
 
 
