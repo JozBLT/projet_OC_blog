@@ -23,10 +23,10 @@ $chapters = getChaptersInfo();
 
         <section>
 
-            <?php foreach($chapters as $value): ?>
-                <h2><?= $value->chapter_name ?></h2>
-                <time><?= $value->chapter_date ?></time><br/>
-            	<a href="chapitre.php?id=<?= $value->id ?>">Lire la suite</a>
+            <?php foreach($chapters as $chapter): ?>
+                <h2><?= $chapter->chapter_name ?></h2>
+                <time><?= $chapter->chapter_date ?></time><br/>
+            	<a href="chapitre.php?id=<?= $chapter->id ?>">Lire la suite</a>
             	<hr />
             <?php endforeach; ?>
             

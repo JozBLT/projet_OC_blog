@@ -1,6 +1,6 @@
 <?php
 
-// fonction pour récupérer le titre et l'id es chapitres
+// fonction pour récupérer le titre et l'id des chapitres
 function getChaptersInfo()
 {
 	require('config/connect.php');
@@ -11,7 +11,7 @@ function getChaptersInfo()
 	$req->closeCursor();
 }
 
-// fonction qui récupère un article
+// fonction qui récupère un article grâce à son id
 function getOneChapter($id)
 {
 	require('config/connect.php');
