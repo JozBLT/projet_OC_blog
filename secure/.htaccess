@@ -1,0 +1,4 @@
+AuthName "Vous devez vous identifier pour aller plus loin"
+AuthType Basic
+AuthUserFile "C:\wamp64\www\projet_OC_blog\secure\.htpasswd"
+Require valid-user
