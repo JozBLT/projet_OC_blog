@@ -4,7 +4,7 @@
 function getChaptersInfoDesc()
 {
 	require('config/connect.php');
-	$req = $bdd->prepare('SELECT id, chapter_name, chapter_date FROM chapters ORDER BY id DESC');
+	$req = $bdd->prepare('SELECT id, chapterName, chapterDate FROM chapters ORDER BY id DESC');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
@@ -15,7 +15,7 @@ function getChaptersInfoDesc()
 function getChaptersInfo()
 {
 	require('config/connect.php');
-	$req = $bdd->prepare('SELECT id, chapter_name, chapter_date FROM chapters ORDER BY id');
+	$req = $bdd->prepare('SELECT id, chapterName, chapterDate FROM chapters ORDER BY id');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
@@ -37,6 +37,15 @@ function getOneChapter($id)
 	{
 		header('location: index.php');
 	}
+	$req->closeCursor();
+}
+
+// fonction pour insérer un chapitre dans la BDD
+function addChapter($chapterName, $chapterText)
+{
+	require('connect.php');
+	$req = $bdd->prepare('INSERT into chapters (chapterName, chapterText, chapterDate) VALUES (?,?,NOW())');
+	$req->execute(array($chapterName, $chapterText));
 	$req->closeCursor();
 }
 

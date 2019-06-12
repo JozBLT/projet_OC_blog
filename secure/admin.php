@@ -1,3 +1,35 @@
+<?php
+
+require_once('../config/functions.php');
+
+if (!empty($_POST))
+{
+	extract($_POST);
+	$errors = array();
+
+	$chapterName = strip_tags($chapterName);
+	$chapterText = strip_tags($chapterText);
+
+	if (empty($chapterName))
+		array_push($errors, 'Vous avez oublié de préciser le titre du chapitre !');
+
+	if (empty($chapterText))
+		array_push($errors, 'Votre chapitre est vide ?');
+
+	if (count($errors) == 0)
+	{
+		$chapterText = addChapter($chapterName, $chapterText);
+
+		$success = 'Votre chapitre a bien été publié !!';
+
+		unset($chapterName);
+		unset($chapterText);
+	}
+}
+
+?>
+
+
 <!DOCTYPE html>
 
 <html>
@@ -14,14 +46,26 @@
 
 		<section>
 
+			<?php
+			if (isset($success))
+				echo $success;
+
+			if (!empty($errors)):?>
+
+				<?php foreach($errors as $error): ?>
+					<p><?= $error ?></p>
+				<?php endforeach; ?>
+
+			<?php endif; ?>
+
 			<form method="post">
 				<p>
-					<label for="title">Titre :</label><br/>
-					<input type="text" name="title" id="title"/>
+					<label for="chapterName">Titre :</label><br/>
+					<input type="text" name="chapterName" id="chapterName" value="<?php if(isset($chapterName)) echo $chapterName ?>"/>
 				</p>
 				<p>
-					<label for="chapter">Chapitre :</label><br/>
-					<textarea name="chapter" id="chapter" cols="30" rows="8"></textarea>
+					<label for="chapterText">Chapitre :</label><br/>
+					<textarea name="chapterText" id="chapterText" cols="30" rows="8" ><?php if(isset($chapterText)) echo $chapterText ?></textarea>
 				</p>
 				<button type="submit">Envoyer</button>
 			</form>

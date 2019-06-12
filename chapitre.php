@@ -48,7 +48,7 @@ else
         <link rel="stylesheet" href="style.css" />
         <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-		<title><?= $chapter->chapter_name ?></title>
+		<title><?= $chapter->chapterName ?></title>
 	</head>
 
 	<body>
@@ -56,9 +56,9 @@ else
 		<?php include('header.php'); ?>
 
 		<section>
-			<h1><?= $chapter->chapter_name ?></h1>
-			<p><?= $chapter->chapter_text ?></p><br/>
-			<time><?= $chapter->chapter_date ?></time>
+			<h1><?= $chapter->chapterName ?></h1>
+			<p><?= $chapter->chapterText ?></p><br/>
+			<time><?= $chapter->chapterDate ?></time>
 			<hr />
 
 			<?php
