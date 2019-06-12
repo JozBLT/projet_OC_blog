@@ -57,7 +57,22 @@ else
 
 		<section>
 			<h1><?= $chapter->chapterName ?></h1>
-			<p><?= $chapter->chapterText ?></p><br/>
+			<p>	
+				<?php
+					$textePropre = $chapter->chapterText;
+					$conv = array(
+						//tableau des symboles à convertir
+						'\[b\](.*?)\[\/b\]' => '<strong>$1</strong>',
+						'\[i\](.*?)\[\/i\]' => '<em>$1</em>',
+						'\[u\](.*?)\[\/u\]' => '<u>$1</u>'
+					);
+					foreach($conv as $o=>$c) {
+						$textePropre = preg_replace('/'.$o.'/',$c, $textePropre);
+					}
+					$textePropre = nl2br($textePropre);
+					echo $textePropre;
+				?>	
+			</p><br/>
 			<time><?= $chapter->chapterDate ?></time>
 			<hr />
 

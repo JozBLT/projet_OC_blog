@@ -58,7 +58,7 @@ function addComment($chapterId, $author, $comment)
 	$req->closeCursor();
 }
 
-// fonctions qui récupère les commentaires d'un chapitre
+// fonction qui récupère les commentaires d'un chapitre
 function getComments($id)
 {
 	require('config/connect.php');

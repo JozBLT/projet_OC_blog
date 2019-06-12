@@ -46,7 +46,7 @@ if (!empty($_POST))
         <script>
 			$(function() {
 				var wbbOpt = {
-				buttons: "bold,|,italic,|,underline,|,quote",
+				buttons: "bold,|,italic,|,underline",
 				lang: "fr"
 				}
 			  $("#chapterText").wysibb(wbbOpt);
