@@ -106,7 +106,6 @@ else
 				<h3><?= $com->author ?></h3>
 				<p><?= $com->comment ?></p>
 				<time><?= $com->date ?></time>
-				<button id="notCool">Signaler</button>
 			<?php endforeach; ?>
 
 		</section>

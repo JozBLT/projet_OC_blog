@@ -4,7 +4,7 @@
 function getChaptersInfoDesc()
 {
 	require('connect.php');
-	$req = $bdd->prepare('SELECT id, chapterName, chapterDate FROM chapters ORDER BY id DESC');
+	$req = $bdd->prepare('SELECT idChapter, chapterName, chapterDate FROM chapters ORDER BY idChapter DESC');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
@@ -15,7 +15,7 @@ function getChaptersInfoDesc()
 function getChaptersInfo()
 {
 	require('connect.php');
-	$req = $bdd->prepare('SELECT id, chapterName, chapterDate FROM chapters ORDER BY id');
+	$req = $bdd->prepare('SELECT idChapter, chapterName, chapterDate FROM chapters ORDER BY idChapter');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
@@ -26,7 +26,7 @@ function getChaptersInfo()
 function getOneChapter($id)
 {
 	require('connect.php');
-	$req = $bdd->prepare('SELECT * FROM chapters WHERE id = ?');
+	$req = $bdd->prepare('SELECT * FROM chapters WHERE idChapter = ?');
 	$req->execute(array($id));
 	if ($req->rowcount() == 1)
 	{
@@ -71,5 +71,14 @@ function getComments($id)
 	$req->execute(array($id));
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
+	$req->closeCursor();
+}
+
+// fonction pour signaler un commentaire
+function reportComment($idComment)
+{
+	require('connect.php');
+	$req =$bdd->prepare('UPDATE comments SET report = 1 WHERE idComment = ?');
+	$req->execute(array($idComment));
 	$req->closeCursor();
 }

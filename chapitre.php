@@ -36,6 +36,13 @@ else
 
 	$chapter = getOneChapter($id);
 	$comments = getComments($id);
+
+	if(isset($_GET['report']) AND !empty($_GET['report'])) 
+	{
+		extract($_GET);
+		$idComment = strip_tags($report);
+		$report = reportComment($idComment);
+	}
 }
 ?>
 
@@ -88,7 +95,7 @@ else
 
 			<?php endif; ?>
 
-			<form action="chapitre.php?id=<?= $chapter->id ?>" method="post">
+			<form action="chapitre.php?id=<?= $chapter->idChapter ?>" method="post">
 				<p>
 					<label for="author">Pseudo :</label><br/>
 					<input type="text" name="author" id="author" value="<?php if(isset($author)) echo $author ?>" />
@@ -106,6 +113,7 @@ else
 				<h3><?= $com->author ?></h3>
 				<p><?= $com->comment ?></p>
 				<time><?= $com->date ?></time>
+				<a href="chapitre.php?id=<?= $chapter->idChapter ?>&report=<?= $com->idComment ?>">Signaler</a>
 			<?php endforeach; ?>
 
 		</section>
