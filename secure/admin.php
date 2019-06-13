@@ -57,20 +57,7 @@ if (!empty($_POST))
 
 	<body>
 
-		<header>
-		    <div id="home">
-		        <a href="index.php"><h1>BILLET SIMPLE POUR L'ALASKA</h1></a>
-		    </div>
-		                
-		    <nav>
-		        <li>
-		            <ul><a href="../index.php"><i class="fas fa-home"></i></a></ul>
-		            <ul><a href="../allChapters.php">Chapitres</a></ul>
-		            <ul><a href="../index.php?action=about">About</a></ul>
-		            <ul><a href="../index.php?action=contact">Contact</a></ul>
-		        </li>
-		    </nav>
-		</header>
+		<?php include('headerAdmin.php'); ?>
 
 		<section>
 

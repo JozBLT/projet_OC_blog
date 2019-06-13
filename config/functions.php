@@ -3,7 +3,7 @@
 // fonction pour récupérer le titre et la date des chapitres par ordre décroissant
 function getChaptersInfoDesc()
 {
-	require('config/connect.php');
+	require('connect.php');
 	$req = $bdd->prepare('SELECT id, chapterName, chapterDate FROM chapters ORDER BY id DESC');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -14,7 +14,7 @@ function getChaptersInfoDesc()
 // fonction pour récupérer le titre et la date des chapitres par ordre croissant
 function getChaptersInfo()
 {
-	require('config/connect.php');
+	require('connect.php');
 	$req = $bdd->prepare('SELECT id, chapterName, chapterDate FROM chapters ORDER BY id');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -25,7 +25,7 @@ function getChaptersInfo()
 // fonction qui récupère un chapitre grâce à son id
 function getOneChapter($id)
 {
-	require('config/connect.php');
+	require('connect.php');
 	$req = $bdd->prepare('SELECT * FROM chapters WHERE id = ?');
 	$req->execute(array($id));
 	if ($req->rowcount() == 1)
@@ -49,10 +49,15 @@ function addChapter($chapterName, $chapterText)
 	$req->closeCursor();
 }
 
+
+
+
+
+
 // fonction pour insérer un commentaire dans la BDD
 function addComment($chapterId, $author, $comment)
 {
-	require('config/connect.php');
+	require('connect.php');
 	$req = $bdd->prepare('INSERT into comments (chapterId, author, comment, date) VALUES (?, ?, ?, NOW())');
 	$req->execute(array($chapterId, $author, $comment));
 	$req->closeCursor();
@@ -61,7 +66,7 @@ function addComment($chapterId, $author, $comment)
 // fonction qui récupère les commentaires d'un chapitre
 function getComments($id)
 {
-	require('config/connect.php');
+	require('connect.php');
 	$req = $bdd->prepare('SELECT * FROM comments WHERE chapterId = ?');
 	$req->execute(array($id));
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
