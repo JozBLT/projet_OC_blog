@@ -113,6 +113,12 @@ else
 				<h3><?= $com->author ?></h3>
 				<p><?= $com->comment ?></p>
 				<time><?= $com->date ?></time>
+				<p><?php
+					$reported = $com->report;
+					if ($reported == 1) {
+						echo "commentaire signalé";
+					};
+				?></p>
 				<a href="chapitre.php?id=<?= $chapter->idChapter ?>&report=<?= $com->idComment ?>">Signaler</a>
 			<?php endforeach; ?>
 
