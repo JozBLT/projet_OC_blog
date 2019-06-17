@@ -1,4 +1,5 @@
 <?php
+
 require_once('../config/functions.php');
 
 $chapters = getChaptersInfo();
@@ -26,7 +27,7 @@ $chapters = getChaptersInfo();
 			<?php foreach($chapters as $chapter): ?>
 				<h2><?= $chapter->chapterName ?></h2>
 				<time><?= $chapter->chapterDate ?></time><br/>
-				<a href="chapitreAdmin.php?id=<?= $chapter->id ?>">Lire la suite</a>
+				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
 				<hr />
 			<?php endforeach; ?>
 

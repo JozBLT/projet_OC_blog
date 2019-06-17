@@ -88,14 +88,14 @@ else
 
 			<?php endif; ?>
 
-			<form action="chapitreAdmin.php?id=<?= $chapter->id ?>" method="post">
+			<form action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>" method="post">
 				<p>
 					<label for="author">Pseudo :</label><br/>
 					<input type="text" name="author" id="author" value="<?php if(isset($author)) echo $author ?>" />
 				</p>
 				<p>
 					<label for="comment">Commentaire :</label><br/>
-					<textarea name="comment" id="comment" cols="30" rows="8"><?php if(isset($comment)) echo $comment ?></textarea>
+					<textarea name="comment" id="comment" cols="40" rows="8"><?php if(isset($comment)) echo $comment ?></textarea>
 				</p>
 				<button type="submit">Envoyer</button>
 			</form>
@@ -106,6 +106,12 @@ else
 				<h3><?= $com->author ?></h3>
 				<p><?= $com->comment ?></p>
 				<time><?= $com->date ?></time>
+				<p><?php
+					$reported = $com->report;
+					if ($reported == 1) {
+						echo "commentaire signalé";
+					};
+				?></p>
 			<?php endforeach; ?>
 
 		</section>
