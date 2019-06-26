@@ -11,6 +11,13 @@ else
 
 	$chapter = getOneChapter($id);
 	$comments = getComments($id);
+
+	if(isset($_GET['report']) AND !empty($_GET['report'])) 
+	{
+		extract($_GET);
+		$idComment = strip_tags($report);
+		$report = validComment($idComment);
+	}
 }
 ?>
 
@@ -63,6 +70,7 @@ else
 						echo "commentaire signalé";
 					};
 				?></p>
+				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&report=<?= $com->idComment ?>">Valider</a>
 			<?php endforeach; ?>
 
 		</section>
