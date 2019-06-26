@@ -49,6 +49,21 @@ function addChapter($chapterName, $chapterText)
 	$req->closeCursor();
 }
 
+// fonction pour supprimer un chapitre
+function deleteChapter($id)
+{
+	require('connect.php');
+	$req = $bdd->prepare('DELETE FROM chapters WHERE id = ?');
+	$req->execute(array($id));
+	$req->closeCursor();
+}
+
+
+
+
+
+
+
 
 
 
@@ -79,6 +94,24 @@ function reportComment($idComment)
 {
 	require('connect.php');
 	$req =$bdd->prepare('UPDATE comments SET report = 1 WHERE idComment = ?');
+	$req->execute(array($idComment));
+	$req->closeCursor();
+}
+
+// fonction pour enlever le signalement d'un commentaire
+function validComment($idComment)
+{
+	require('connect.php');
+	$req = $bdd->prepare('UPDATE comments SET report = 0 WHERE idComment = ?');
+	$req->execute(array($idComment));
+	$req->closeCursor();
+}
+
+// fonction pour supprimer un commentaire innadapté
+function deleteComment($idComment)
+{
+	require('connect.php');
+	$req = $bdd->prepare('DELETE FROM comments WHERE idComment = ?');
 	$req->execute(array($idComment));
 	$req->closeCursor();
 }

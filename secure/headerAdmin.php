@@ -1,6 +1,6 @@
 <header>
     <div id="home">
-        <a href="index.php"><h1>BILLET SIMPLE POUR L'ALASKA</h1></a>
+        <a href="admin.php"><h1>BILLET SIMPLE POUR L'ALASKA</h1></a>
     </div>
                 
     <nav>
