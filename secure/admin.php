@@ -2,6 +2,13 @@
 
 require_once('../config/functions.php');
 
+if(isset($_GET['id']) AND !empty($_GET['id'])) 
+{
+	extract($_GET);
+	$id = strip_tags($id);
+	$edit = getOneChapter($id);
+}
+
 if (!empty($_POST))
 {
 	extract($_POST);
@@ -26,7 +33,6 @@ if (!empty($_POST))
 		unset($chapterText);
 	}
 }
-
 ?>
 
 
@@ -76,11 +82,30 @@ if (!empty($_POST))
 			<form method="post">
 				<p>
 					<label for="chapterName">Titre :</label><br/>
-					<input type="text" name="chapterName" id="chapterName" value="<?php if(isset($chapterName)) echo $chapterName ?>"/>
+					<input type="text" name="chapterName" id="chapterName" value="<?php if(isset($chapterName)) 
+																						{
+																							echo $chapterName;
+																						}
+																						else if(isset($edit))
+																						{
+																							echo $edit->chapterName; 
+																						}
+																						?>
+					"/>
 				</p>
 				<p>
 					<label for="chapterText">Chapitre :</label><br/>
-					<textarea name="chapterText" id="chapterText" cols="30" rows="8" ><?php if(isset($chapterText)) echo $chapterText ?></textarea>
+					<textarea name="chapterText" id="chapterText" cols="30" rows="8" ><?php if(isset($chapterText))
+																							{
+																								echo $chapterText;
+																							}
+																							else if(isset($edit))
+																							{
+																								echo $edit->chapterText;
+																							}
+																							?>
+						
+					</textarea>
 				</p>
 				<button type="submit">Envoyer</button>
 			</form>

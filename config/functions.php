@@ -58,6 +58,8 @@ function deleteChapter($idChapter)
 	$req->closeCursor();
 }
 
+// fonction pour éditer un chapitre
+
 
 
 

@@ -19,11 +19,11 @@ else
 		$valid = validComment($idComment);
 	}
 
-	if(isset($_GET['delete']) AND !empty($_GET['delete'])) 
+	if(isset($_GET['deleteCom']) AND !empty($_GET['deleteCom'])) 
 	{
 		extract($_GET);
-		$idComment = strip_tags($delete);
-		$delete = deleteComment($idComment);
+		$idComment = strip_tags($deleteCom);
+		$deleteCom = deleteComment($idComment);
 	}
 
 	if(isset($_GET['deleteChap']) AND !empty($_GET['deleteChap'])) 
@@ -70,7 +70,8 @@ else
 				?>	
 			</p><br/>
 			<time><?= $chapter->chapterDate ?></time><br/>
-			<a href="allChaptersAdmin.php?deleteChap=<?= $chapter->idChapter ?>">Supprimer ce chapitre</a>
+			<a href="allChaptersAdmin.php?deleteChap=<?= $chapter->idChapter ?>">Supprimer ce chapitre</a><br/><br/>
+			<a href="admin.php?id=<?= $chapter->idChapter ?>">Éditer ce chapitre</a>
 			<hr />
 
 			<h2>Commentaires</h2>
@@ -86,7 +87,7 @@ else
 					};
 				?></p>
 				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&valid=<?= $com->idComment ?>">Valider</a>
-				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&delete=<?= $com->idComment ?>">Supprimer</a>
+				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&deleteCom=<?= $com->idComment ?>">Supprimer</a>
 			<?php endforeach; ?>
 
 		</section>
