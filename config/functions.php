@@ -50,11 +50,11 @@ function addChapter($chapterName, $chapterText)
 }
 
 // fonction pour supprimer un chapitre
-function deleteChapter($id)
+function deleteChapter($idChapter)
 {
 	require('connect.php');
-	$req = $bdd->prepare('DELETE FROM chapters WHERE id = ?');
-	$req->execute(array($id));
+	$req = $bdd->prepare('DELETE FROM chapters WHERE idChapter = ?');
+	$req->execute(array($idChapter));
 	$req->closeCursor();
 }
 

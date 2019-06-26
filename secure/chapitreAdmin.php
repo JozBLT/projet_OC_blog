@@ -25,6 +25,13 @@ else
 		$idComment = strip_tags($delete);
 		$delete = deleteComment($idComment);
 	}
+
+	if(isset($_GET['deleteChap']) AND !empty($_GET['deleteChap'])) 
+	{
+		extract($_GET);
+		$idChapter = strip_tags($deleteChap);
+		$deleteChap = deleteChapter($idChapter);
+	}
 }
 ?>
 
@@ -62,7 +69,8 @@ else
 					echo $textePropre;
 				?>	
 			</p><br/>
-			<time><?= $chapter->chapterDate ?></time>
+			<time><?= $chapter->chapterDate ?></time><br/>
+			<a href="allChaptersAdmin.php?deleteChap=<?= $chapter->idChapter ?>">Supprimer ce chapitre</a>
 			<hr />
 
 			<h2>Commentaires</h2>
