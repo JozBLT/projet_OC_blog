@@ -12,11 +12,18 @@ else
 	$chapter = getOneChapter($id);
 	$comments = getComments($id);
 
-	if(isset($_GET['report']) AND !empty($_GET['report'])) 
+	if(isset($_GET['valid']) AND !empty($_GET['valid'])) 
 	{
 		extract($_GET);
-		$idComment = strip_tags($report);
-		$report = validComment($idComment);
+		$idComment = strip_tags($valid);
+		$valid = validComment($idComment);
+	}
+
+	if(isset($_GET['delete']) AND !empty($_GET['delete'])) 
+	{
+		extract($_GET);
+		$idComment = strip_tags($delete);
+		$delete = deleteComment($idComment);
 	}
 }
 ?>
@@ -70,7 +77,8 @@ else
 						echo "commentaire signalé";
 					};
 				?></p>
-				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&report=<?= $com->idComment ?>">Valider</a>
+				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&valid=<?= $com->idComment ?>">Valider</a>
+				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&delete=<?= $com->idComment ?>">Supprimer</a>
 			<?php endforeach; ?>
 
 		</section>
