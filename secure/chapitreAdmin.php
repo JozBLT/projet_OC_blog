@@ -41,7 +41,7 @@ else
 	<head>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="styleAdmin.css" />
         <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 		<title><?= $chapter->chapterName ?></title>
@@ -52,43 +52,47 @@ else
 		<?php include('headerAdmin.php'); ?>
 
 		<section>
-			<h1><?= $chapter->chapterName ?></h1>
-			<p>	
-				<?php
-					$textePropre = $chapter->chapterText;
-					$conv = array(
-						//tableau des symboles à convertir
-						'\[b\](.*?)\[\/b\]' => '<strong>$1</strong>',
-						'\[i\](.*?)\[\/i\]' => '<em>$1</em>',
-						'\[u\](.*?)\[\/u\]' => '<u>$1</u>'
-					);
-					foreach($conv as $o=>$c) {
-						$textePropre = preg_replace('/'.$o.'/',$c, $textePropre);
-					}
-					$textePropre = nl2br($textePropre);
-					echo $textePropre;
-				?>	
-			</p><br/>
-			<time><?= $chapter->chapterDate ?></time><br/>
-			<a href="allChaptersAdmin.php?deleteChap=<?= $chapter->idChapter ?>">Supprimer ce chapitre</a><br/><br/>
-			<a href="admin.php?id=<?= $chapter->idChapter ?>">Éditer ce chapitre</a>
-			<hr />
+			<div class="preview">
+				<h1><?= $chapter->chapterName ?></h1>
+				<p>	
+					<?php
+						$textePropre = $chapter->chapterText;
+						$conv = array(
+							//tableau des symboles à convertir
+							'\[b\](.*?)\[\/b\]' => '<strong>$1</strong>',
+							'\[i\](.*?)\[\/i\]' => '<em>$1</em>',
+							'\[u\](.*?)\[\/u\]' => '<u>$1</u>'
+						);
+						foreach($conv as $o=>$c) {
+							$textePropre = preg_replace('/'.$o.'/',$c, $textePropre);
+						}
+						$textePropre = nl2br($textePropre);
+						echo $textePropre;
+					?>	
+				</p><br/>
+				<time><?= $chapter->chapterDate ?></time><br/>
+				<a href="allChaptersAdmin.php?deleteChap=<?= $chapter->idChapter ?>">Supprimer ce chapitre</a><br/><br/>
+				<a href="admin.php?id=<?= $chapter->idChapter ?>">Éditer ce chapitre</a>
+			</div>
 
-			<h2>Commentaires</h2>
+			<div id="comments">
+				<h2>Commentaires</h2>
 
-			<?php foreach($comments as $com): ?>
-				<h3><?= $com->author ?></h3>
-				<p><?= $com->comment ?></p>
-				<time><?= $com->date ?></time>
-				<p><?php
-					$reported = $com->report;
-					if ($reported == 1) {
-						echo "commentaire signalé";
-					};
-				?></p>
-				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&valid=<?= $com->idComment ?>">Valider</a>
-				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&deleteCom=<?= $com->idComment ?>">Supprimer</a>
-			<?php endforeach; ?>
+				<?php foreach($comments as $com): ?>
+					<h3><?= $com->author ?></h3>
+					<p><?= $com->comment ?></p>
+					<time><?= $com->date ?></time>
+					<p><?php
+						$reported = $com->report;
+						if ($reported == 1) {
+							echo "commentaire signalé";
+						};
+					?></p>
+					<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&valid=<?= $com->idComment ?>">Valider</a>
+					<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&deleteCom=<?= $com->idComment ?>">Supprimer</a>
+					<hr/>
+				<?php endforeach; ?>
+			</div>
 
 		</section>
 	</body>

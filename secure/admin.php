@@ -42,7 +42,7 @@ if (!empty($_POST))
 	<head>
 		<meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../style.css" />
+        <link rel="stylesheet" href="styleAdmin.css" />
         <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -67,48 +67,50 @@ if (!empty($_POST))
 
 		<section>
 
-			<?php
-			if (isset($success))
-				echo $success;
+			<div id="write">
+				<?php
+				if (isset($success))
+					echo $success;
 
-			if (!empty($errors)):?>
+				if (!empty($errors)):?>
 
-				<?php foreach($errors as $error): ?>
-					<p><?= $error ?></p>
-				<?php endforeach; ?>
+					<?php foreach($errors as $error): ?>
+						<p><?= $error ?></p>
+					<?php endforeach; ?>
 
-			<?php endif; ?>
+				<?php endif; ?>
 
-			<form method="post">
-				<p>
-					<label for="chapterName">Titre :</label><br/>
-					<input type="text" name="chapterName" id="chapterName" value="<?php if(isset($chapterName)) 
-																						{
-																							echo $chapterName;
-																						}
-																						else if(isset($edit))
-																						{
-																							echo $edit->chapterName; 
-																						}
-																						?>
-					"/>
-				</p>
-				<p>
-					<label for="chapterText">Chapitre :</label><br/>
-					<textarea name="chapterText" id="chapterText" cols="30" rows="8" ><?php if(isset($chapterText))
+				<form method="post">
+					<p>
+						<label for="chapterName">Titre :</label><br/>
+						<input type="text" name="chapterName" id="chapterName" value="<?php if(isset($chapterName)) 
 																							{
-																								echo $chapterText;
+																								echo $chapterName;
 																							}
 																							else if(isset($edit))
 																							{
-																								echo $edit->chapterText;
+																								echo $edit->chapterName; 
 																							}
 																							?>
-						
-					</textarea>
-				</p>
-				<button type="submit">Envoyer</button>
-			</form>
+						"/>
+					</p>
+					<p>
+						<label for="chapterText">Chapitre :</label><br/>
+						<textarea name="chapterText" id="chapterText" cols="30" rows="8" ><?php if(isset($chapterText))
+																								{
+																									echo $chapterText;
+																								}
+																								else if(isset($edit))
+																								{
+																									echo $edit->chapterText;
+																								}
+																								?>
+							
+						</textarea>
+					</p>
+					<button type="submit">Envoyer</button>
+				</form>
+			</div>
 
 		</section>
 	</body>

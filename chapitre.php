@@ -119,8 +119,8 @@ else
 					<h3><?= $com->author ?></h3>
 					<p><?= $com->comment ?></p>
 					<div class="under">
-						<time><?= $com->date ?></time>
-						<a href="chapitre.php?id=<?= $chapter->idChapter ?>&report=<?= $com->idComment ?>">Signaler</a>
+						<time><?= $com->date ?></time> 
+						<a href="chapitre.php?id=<?= $chapter->idChapter ?>&report=<?= $com->idComment ?>">Signaler</a><!-- Ajouter un champ VALIDÉ -->
 					</div>
 					<p><?php
 						$reported = $com->report;
