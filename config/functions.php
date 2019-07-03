@@ -4,7 +4,7 @@
 function getChaptersInfoDesc()
 {
 	require('connect.php');
-	$req = $bdd->prepare('SELECT idChapter, chapterName, chapterDate FROM chapters ORDER BY idChapter DESC');
+	$req = $bdd->prepare('SELECT idChapter, chapterName, chapterDate FROM chapters ORDER BY idChapter DESC LIMIT 3');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
