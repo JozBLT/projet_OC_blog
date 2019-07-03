@@ -27,7 +27,7 @@ $chapters = getChaptersInfoDesc();
             <?php foreach($chapters as $chapter): ?>
                 <div class="preview">
                     <h2><?= $chapter->chapterName ?></h2>
-                    <p>Lorem ipsum uroicuneriugbsd oziencvjqo doi, qroicnoqi,oqinsr ok,o qsrcqrcuneriuvqnv qozeincozn oeicnoin sen soinc osien  goinoicqoqiglk,ndcoi,nrcosicnoi?NOICA?ZOIEC?OSID?COE?OZK?GFODK?OC?OSKXDOZCKJOI?COKD?KOZN...</p>
+                    <p><?= $textPreview = substr($chapter->chapterText, 0, 500) ?>...</p><br/>
                     <time>Chapitre publié le : <?= $chapter->chapterDate ?></time><br/>
                 	<a href="chapitre.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
                 </div>

@@ -1,10 +1,10 @@
 <?php
 
-// fonction pour récupérer le titre et la date des chapitres par ordre décroissant
+// fonction pour récupérer le titre et la date des 3 derniers chapitres par ordre décroissant
 function getChaptersInfoDesc()
 {
 	require('connect.php');
-	$req = $bdd->prepare('SELECT idChapter, chapterName, chapterDate FROM chapters ORDER BY idChapter DESC LIMIT 3');
+	$req = $bdd->prepare('SELECT * FROM chapters ORDER BY idChapter DESC LIMIT 3');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
@@ -15,7 +15,7 @@ function getChaptersInfoDesc()
 function getChaptersInfo()
 {
 	require('connect.php');
-	$req = $bdd->prepare('SELECT idChapter, chapterName, chapterDate FROM chapters ORDER BY idChapter');
+	$req = $bdd->prepare('SELECT * FROM chapters ORDER BY idChapter');
 	$req->execute();
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
