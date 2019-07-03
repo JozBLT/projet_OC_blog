@@ -5,6 +5,7 @@ require_once('../config/functions.php');
 $chapters = getChaptersInfo();
 ?>
 
+
 <!DOCTYPE html>
 
 <html>
@@ -22,16 +23,19 @@ $chapters = getChaptersInfo();
 		<?php include('headerAdmin.php'); ?>
 
 		<section>
-			
 
-			<?php foreach($chapters as $chapter): ?>
-				<h2><?= $chapter->chapterName ?></h2>
-				<time><?= $chapter->chapterDate ?></time><br/>
-				<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
-				<hr />
-			<?php endforeach; ?>
+			<div id="previews">
+        		<?php foreach($chapters as $chapter): ?>
+            		<div class="iconPreview">
+						<h2><?= $chapter->chapterName ?></h2>
+						<time><?= $chapter->chapterDate ?></time><br/>
+						<a href="chapitre.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
+					</div>
+				<?php endforeach; ?>
+			</div>
 
 		</section>
+
 	</body>
 	
 </html>
