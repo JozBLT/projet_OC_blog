@@ -117,3 +117,43 @@ function deleteComment($idComment)
 	$req->execute(array($idComment));
 	$req->closeCursor();
 }
+
+
+
+
+
+// fonction boutons chapitres
+function getButtonsChap()
+{
+	$btnChap = '';
+	$btnCp = array(
+	
+		1=>'éditer',
+		2=>'supprimer',
+
+	);
+
+	while (list($h,$p)=each($btnCp)) 
+	{
+		$btnChap.='<input type="submit" value="'.$p.'" name="btn_'.$h.'" id="btn_'.$h.'"/>';
+	}
+	return $btnChap;
+}
+
+//fonction boutons commentaires
+function getButtonsCom()
+{
+	$btnCom = '';
+	$btnCm = array(
+	
+		1=>'valider',
+		2=>'supprimer',
+
+	);
+	
+	while (list($o,$m)=each($btnCm)) 
+	{
+		$btnCom.='<input type="submit" value="'.$m.'" name="btn_'.$o.'" id="btn_'.$o.'"/>';
+	}
+	return $btnCom;
+}

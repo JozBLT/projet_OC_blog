@@ -71,8 +71,8 @@ else
 					?>	
 				</p><br/>
 				<time><?= $chapter->chapterDate ?></time><br/>
-				<a href="allChaptersAdmin.php?deleteChap=<?= $chapter->idChapter ?>">Supprimer ce chapitre</a><br/><br/>
 				<a href="admin.php?id=<?= $chapter->idChapter ?>">Éditer ce chapitre</a>
+				<a href="allChaptersAdmin.php?deleteChap=<?= $chapter->idChapter ?>">Supprimer ce chapitre</a>
 			</div>
 
 			<div id="comments">
@@ -91,6 +91,11 @@ else
 					<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&valid=<?= $com->idComment ?>">Valider</a>
 					<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&deleteCom=<?= $com->idComment ?>">Supprimer</a>
 					<hr/>
+					<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+						<div id="buttons_ panel">
+							<?php echo getButtonsCom(); ?>
+						</div>
+					</form>
 				<?php endforeach; ?>
 			</div>
 
