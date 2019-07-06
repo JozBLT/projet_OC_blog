@@ -30,7 +30,7 @@ $chapters = getChaptersInfo();
 						<h2><?= $chapter->chapterName ?></h2>
 						<p><?= $textPreview = substr($chapter->chapterText, 0, 250) ?>...</p><br/>
 						<time><?= $chapter->chapterDate ?></time><br/>
-						<a href="chapitre.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
+						<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
 					</div>
 				<?php endforeach; ?>
 			</div>
