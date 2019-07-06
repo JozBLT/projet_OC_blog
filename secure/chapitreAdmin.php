@@ -12,26 +12,41 @@ else
 	$chapter = getOneChapter($id);
 	$comments = getComments($id);
 
-	if(isset($_GET['valid']) AND !empty($_GET['valid'])) 
-	{
-		extract($_GET);
-		$idComment = strip_tags($valid);
-		$valid = validComment($idComment);
-	}
-
-	if(isset($_GET['deleteCom']) AND !empty($_GET['deleteCom'])) 
-	{
-		extract($_GET);
-		$idComment = strip_tags($deleteCom);
-		$deleteCom = deleteComment($idComment);
-	}
-
 	if(isset($_GET['deleteChap']) AND !empty($_GET['deleteChap'])) 
 	{
 		extract($_GET);
 		$idChapter = strip_tags($deleteChap);
 		$deleteChap = deleteChapter($idChapter);
 	}
+
+
+
+
+
+	if (isset($_POST['btnCm_1']))
+	{
+		if(isset($_GET['status'])) 
+		{
+			extract($_GET);
+			$idComment = strip_tags($status);
+			$status = validComment($idComment);
+		}
+		echo "Commentaire validé";
+	}
+	if (isset($_POST['btnCm_2']))
+	{
+		if(isset($_GET['status'])) 
+		{
+			extract($_GET);
+			$idComment = strip_tags($status);
+			$status = deleteComment($idComment);
+		}
+		echo "Commentaire supprimé";
+	}
+
+
+
+
 }
 ?>
 
@@ -88,14 +103,12 @@ else
 							echo "commentaire signalé";
 						};
 					?></p>
-					<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&valid=<?= $com->idComment ?>">Valider</a>
-					<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&deleteCom=<?= $com->idComment ?>">Supprimer</a>
-					<hr/>
-					<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+					<form action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&status=<?= $com->idComment ?>" method="post">
 						<div id="buttons_ panel">
 							<?php echo getButtonsCom(); ?>
 						</div>
 					</form>
+					<hr/>
 				<?php endforeach; ?>
 			</div>
 

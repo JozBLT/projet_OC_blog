@@ -135,7 +135,7 @@ function getButtonsChap()
 
 	while (list($h,$p)=each($btnCp)) 
 	{
-		$btnChap.='<input type="submit" value="'.$p.'" name="btn_'.$h.'" id="btn_'.$h.'"/>';
+		$btnChap.='<input type="submit" value="'.$p.'" name="btnCp_'.$h.'" id="btnCp_'.$h.'"/>';
 	}
 	return $btnChap;
 }
@@ -153,7 +153,7 @@ function getButtonsCom()
 	
 	while (list($o,$m)=each($btnCm)) 
 	{
-		$btnCom.='<input type="submit" value="'.$m.'" name="btn_'.$o.'" id="btn_'.$o.'"/>';
+		$btnCom.='<input type="submit" value="'.$m.'" name="btnCm_'.$o.'" id="btnCm_'.$o.'"/>';
 	}
 	return $btnCom;
 }
