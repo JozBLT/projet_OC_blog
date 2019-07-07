@@ -122,6 +122,10 @@ function deleteComment($idComment)
 
 
 
+
+
+
+
 // fonction boutons chapitres
 function getButtonsChap()
 {
@@ -139,6 +143,7 @@ function getButtonsChap()
 	}
 	return $btnChap;
 }
+
 
 //fonction boutons commentaires
 function getButtonsCom()

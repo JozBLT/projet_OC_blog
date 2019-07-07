@@ -8,7 +8,7 @@ if(isset($_GET['id']) AND !empty($_GET['id']))
 	$id = strip_tags($id);
 	$edit = getOneChapter($id);
 }
-
+//vérification champs remplis
 if (!empty($_POST))
 {
 	extract($_POST);

@@ -12,36 +12,52 @@ else
 	$chapter = getOneChapter($id);
 	$comments = getComments($id);
 
-	if(isset($_GET['deleteChap']) AND !empty($_GET['deleteChap'])) 
-	{
-		extract($_GET);
-		$idChapter = strip_tags($deleteChap);
-		$deleteChap = deleteChapter($idChapter);
-	}
 
 
-
-
-
+//édition du'un commentaire
 	if (isset($_POST['btnCm_1']))
 	{
-		if(isset($_GET['status'])) 
+		if(isset($_GET['statusCom'])) 
 		{
 			extract($_GET);
-			$idComment = strip_tags($status);
-			$status = validComment($idComment);
+			$idComment = strip_tags($statusCom);
+			$statusCom = validComment($idComment);
 		}
 		echo "Commentaire validé";
 	}
 	if (isset($_POST['btnCm_2']))
 	{
-		if(isset($_GET['status'])) 
+		if(isset($_GET['statusCom'])) 
 		{
 			extract($_GET);
-			$idComment = strip_tags($status);
-			$status = deleteComment($idComment);
+			$idComment = strip_tags($statusCom);
+			$statusCom = deleteComment($idComment);
 		}
 		echo "Commentaire supprimé";
+	}
+
+
+
+
+//édition du chapitre
+	if (isset($_POST['btnCp_1']))
+	{
+		if(isset($_GET['statusChap'])) 
+		{
+			$idChapter = strip_tags($statusChap);
+			$statusChap = "";
+		}
+		echo "Chapitre prêt à être édité";
+	}
+	if (isset($_POST['btnCp_2']))
+	{
+		if(isset($_GET['statusChap'])) 
+		{
+			extract($_GET);
+			$idChapter = strip_tags($statusChap);
+			$statusChap = deleteChapter($idChapter);
+		}
+		echo "Chapitre supprimé";
 	}
 
 
@@ -88,6 +104,12 @@ else
 				<time><?= $chapter->chapterDate ?></time><br/>
 				<a href="admin.php?id=<?= $chapter->idChapter ?>">Éditer ce chapitre</a>
 				<a href="allChaptersAdmin.php?deleteChap=<?= $chapter->idChapter ?>">Supprimer ce chapitre</a>
+				<hr/>
+				<form action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&statusChap=<?= $chapter->idChapter ?>" method="post">
+					<div class="buttons_ panel">
+						<?php echo getButtonsChap(); ?>
+					</div>
+				</form>
 			</div>
 
 			<div id="comments">
@@ -103,8 +125,8 @@ else
 							echo "commentaire signalé";
 						};
 					?></p>
-					<form action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&status=<?= $com->idComment ?>" method="post">
-						<div id="buttons_ panel">
+					<form action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&statusCom=<?= $com->idComment ?>" method="post">
+						<div class="buttons_ panel">
 							<?php echo getButtonsCom(); ?>
 						</div>
 					</form>
