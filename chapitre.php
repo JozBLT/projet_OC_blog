@@ -106,7 +106,7 @@ else
 					</p>
 					<p>
 						<label for="comment">Commentaire :</label><br/>
-						<textarea name="comment" id="comment" cols="30" rows="8"><?php if(isset($comment)) echo $comment ?></textarea>
+						<input type="text" name="comment" id="comment" cols="30" rows="8" value="<?php if(isset($comment)) echo $comment ?>" />
 					</p>
 					<button type="submit">Envoyer</button>
 				</form>

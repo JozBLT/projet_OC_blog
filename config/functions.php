@@ -55,11 +55,19 @@ function deleteChapter($idChapter)
 	require('connect.php');
 	$req = $bdd->prepare('DELETE FROM chapters WHERE idChapter = ?');
 	$req->execute(array($idChapter));
+	$req = $bdd->prepare('DELETE FROM comments WHERE chapterId = ?');
+	$req->execute(array($idChapter));
 	$req->closeCursor();
 }
 
 // fonction pour éditer un chapitre
-
+function updateChapter($chapterName, $chapterText,$idChapter)
+{
+	require('connect.php');
+	$req = $bdd->prepare('UPDATE chapters SET chapterName = ?, chapterText = ?, dateEdit = NOW() WHERE idChapter = ?');
+	$req->execute(array($idChapter));
+	$req->closeCursor();
+}
 
 
 
@@ -161,4 +169,23 @@ function getButtonsCom()
 		$btnCom.='<input type="submit" value="'.$m.'" name="btnCm_'.$o.'" id="btnCm_'.$o.'"/>';
 	}
 	return $btnCom;
+}
+
+
+//fonction boutons envoi de chapitre
+function getButtonsSend()
+{
+	$btnSend = '';
+	$btnSd = array(
+	
+		1=>'Envoyer',
+		2=>'Éditer',
+
+	);
+	
+	while (list($s,$d)=each($btnSd)) 
+	{
+		$btnSend.='<input type="submit" value="'.$d.'" name="btnCm_'.$s.'" id="btnCm_'.$s.'"/>';
+	}
+	return $btnSend;
 }
