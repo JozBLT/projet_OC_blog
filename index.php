@@ -27,7 +27,23 @@ $chapters = getChaptersInfoDesc();
             <?php foreach($chapters as $chapter): ?>
                 <div class="preview">
                     <h2><?= $chapter->chapterName ?></h2>
-                    <p><?= $textPreview = substr($chapter->chapterText, 0, 500) ?>...</p><br/>
+                    <p>
+                            <?php
+                                $textePropre = $chapter->chapterText;
+                                $conv = array(
+                                    //tableau des symboles à convertir
+                                    '\[b\](.*?)\[\/b\]' => '<strong>$1</strong>',
+                                    '\[i\](.*?)\[\/i\]' => '<em>$1</em>',
+                                    '\[u\](.*?)\[\/u\]' => '<u>$1</u>'
+                                );
+                                foreach($conv as $o=>$c) 
+                                {
+                                    $textePropre = preg_replace('/'.$o.'/',$c, $textePropre);
+                                }
+                                $textePropre = nl2br($textePropre);
+                                echo $textPreview = substr($textePropre, 0, 500);
+                            ?> ...
+                        </p><br/>
                     <time>Chapitre publié le : <?= $chapter->chapterDate ?></time><br/>
                 	<a href="chapitre.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
                 </div>

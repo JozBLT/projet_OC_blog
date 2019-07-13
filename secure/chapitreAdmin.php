@@ -1,7 +1,7 @@
 <?php
 
 if (!isset($_GET['id']) OR !is_numeric($_GET['id']))
-	header('location: admin.php');
+	header('location: allChaptersAdmin.php');
 else
 {
 	extract($_GET);
@@ -9,7 +9,6 @@ else
 
 	require_once('../config/functions.php');
 
-	$comments = getComments($id);
 	$chapter = getOneChapter($id);
 	$textePropre = $chapter->chapterText;
 	$conv = array(
@@ -25,8 +24,22 @@ else
 	$textePropre = nl2br($textePropre);
 
 
+	//édition d'un chapitre
+	if (isset($_POST['btnCp_1']))
+		header('location: admin.php?id='.$id);
+	//suppression d'un chapitre
+	if (isset($_POST['btnCp_2']))
+	{
+		if(isset($_GET['id'])) 
+		{
+			extract($_GET);
+			$idChapter = strip_tags($id);
+			$deletedChap = deleteChapter($idChapter);
+			echo "Chapitre supprimé";
+		}
+	}
 
-	//édition d'un commentaire
+	//validation d'un commentaire
 	if (isset($_POST['btnCm_1']))
 	{
 		if(isset($_GET['statusCom'])) 
@@ -37,6 +50,7 @@ else
 		}
 		echo "Commentaire validé";
 	}
+	//suppression d'un commentaire
 	if (isset($_POST['btnCm_2']))
 	{
 		if(isset($_GET['statusCom'])) 
@@ -48,7 +62,7 @@ else
 		echo "Commentaire supprimé";
 	}
 
-
+	$comments = getComments($id);
 }
 ?>
 
@@ -79,7 +93,7 @@ else
 					echo '<time>Édité le : '.$dateEdit.'</time><br/>';
 				?>
 				<hr/>
-				<form method="post" action="admin.php?id=<?= $chapter->idChapter ?>">
+				<form method="post">
 					<div class="buttons_ panel">
 						<?php echo getButtonsChap(); ?>
 					</div>
@@ -93,12 +107,13 @@ else
 					<h3><?= $com->author ?></h3>
 					<p><?= $com->comment ?></p>
 					<time><?= $com->date ?></time>
-					<p><?php
+					<p>
+						<?php
 						$reported = $com->report;
-						if ($reported == 1) {
+						if ($reported == 1)
 							echo "commentaire signalé";
-						};
-					?></p>
+						?>
+					</p>
 					<form method="post" action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&statusCom=<?= $com->idComment ?>" >
 						<div class="buttons_ panel">
 							<?php echo getButtonsCom(); ?>

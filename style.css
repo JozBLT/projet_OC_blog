@@ -9,15 +9,10 @@ a
 	text-decoration: none;
 }
 
-h1
+h1, h2
 {
 	color: #81C4DF;
 	font-family: 'Caveat', cursive;
-}
-
-h2
-{
-	text-decoration: underline;
 }
 
 
@@ -48,10 +43,11 @@ nav ul
 
 nav a
 {
-    font-size: 1em;
+    font-size: 2em;
     color: #181818;
     text-decoration: none;
     padding-bottom: 3px;
+    font-family: 'Caveat', cursive;
 }
 
 nav a:hover
@@ -79,7 +75,7 @@ nav a:hover
 	width: 88%;
 	padding: 2% 5%;
 	margin: 2%;
-	border: solid 1px black;
+	border: solid 1px #81C4DF;
 	border-radius: 10px;
 	background-color: #FAFAFA;
 }
@@ -106,7 +102,7 @@ nav a:hover
 	width: 25%;
 	padding: 2% 1%;
 	margin: 2%;
-	border: solid 5px #81C4DF;
+	border: solid 3px #81C4DF;
 	border-radius: 10px;
 	background-color: #FAFAFA;
 }

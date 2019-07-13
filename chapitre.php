@@ -34,15 +34,15 @@ else
 		}
 	}
 
-	$chapter = getOneChapter($id);
-	$comments = getComments($id);
-
 	if(isset($_GET['report']) AND !empty($_GET['report'])) 
 	{
 		extract($_GET);
 		$idComment = strip_tags($report);
 		$report = reportComment($idComment);
 	}
+
+	$chapter = getOneChapter($id);
+	$comments = getComments($id);
 }
 ?>
 
@@ -64,7 +64,7 @@ else
 
 		<section>
 			<div class="preview">
-				<h1><?= $chapter->chapterName ?></h1>
+				<h2><?= $chapter->chapterName ?></h2>
 				<p>	
 					<?php
 						$textePropre = $chapter->chapterText;

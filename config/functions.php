@@ -47,6 +47,7 @@ function addChapter($chapterName, $chapterText)
 	$req = $bdd->prepare('INSERT into chapters (chapterName, chapterText, chapterDate) VALUES (?,?,NOW())');
 	$req->execute(array($chapterName, $chapterText));
 	$req->closeCursor();
+	header('location: allChaptersAdmin.php');
 }
 
 // fonction pour supprimer un chapitre
@@ -58,6 +59,7 @@ function deleteChapter($idChapter)
 	$req = $bdd->prepare('DELETE FROM comments WHERE chapterId = ?');
 	$req->execute(array($idChapter));
 	$req->closeCursor();
+	header('location: allChaptersAdmin.php');
 }
 
 // fonction pour éditer un chapitre
@@ -67,12 +69,13 @@ function updateChapter($chapterName, $chapterText,$idChapter)
 	$req = $bdd->prepare('UPDATE chapters SET chapterName = ?, chapterText = ?, dateEdit = NOW() WHERE idChapter = ?');
 	$req->execute(array($chapterName, $chapterText,$idChapter));
 	$req->closeCursor();
+	header('location: allChaptersAdmin.php');
 }
 
 
 
 
-//	header('location: chapitreAdmin?php?id='.$var);
+//	header('location: chapitreAdmin.php?id='.$var);
 
 
 
