@@ -45,6 +45,11 @@ $chapters = getChaptersInfoDesc();
                             ?> ...
                         </p><br/>
                     <time>Chapitre publié le : <?= $chapter->chapterDate ?></time><br/>
+                    <?php
+					$dateEdit = $chapter->dateEdit;
+					if ($dateEdit !== NULL)
+						echo '<time>Édité le : '.$dateEdit.'</time><br/>';
+					?>
                 	<a href="chapitre.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
                 </div>
             <?php endforeach; ?>

@@ -81,7 +81,12 @@ else
 						echo $textePropre;
 					?>	
 				</p><br/>
-				<time>Chapitre publié le : <?= $chapter->chapterDate ?></time>
+				<time>Chapitre publié le : <?= $chapter->chapterDate ?></time><br/>
+				<?php
+				$dateEdit = $chapter->dateEdit;
+				if ($dateEdit !== NULL)
+					echo '<time>Édité le : '.$dateEdit.'</time><br/>';
+				?>
 			</div>
 
 			<div id="comment">
