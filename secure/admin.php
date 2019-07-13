@@ -2,13 +2,17 @@
 
 require_once('../config/functions.php');
 
+$sendMode = 0;
+
 if(isset($_GET['id'])) 
 {
+	$sendMode = 1;
 	extract($_GET);
 	$id = strip_tags($id);
 	$edit = getOneChapter($id);
 
-	//édition d'un chapitre
+
+	//affichage du chapitre à éditer
 	if (isset($_POST['btnCp_1']))
 	{
 		if(isset($edit->idChapter)) 
@@ -20,56 +24,58 @@ if(isset($_GET['id']))
 			die('Erreur : l\'article n\'existe pas');
 		}
 	}
-	//suppression d'un chapitre
-	if (isset($_POST['btnCp_2']))
+}
+
+//envoi des chapitres
+if (isset($_POST['chapterName'], $_POST['chapterText']))
+{
+	//vérification champs remplis
+	if (!empty($_POST))
 	{
-		if(isset($_GET['id'])) 
+		extract($_POST);
+		$errors = array();
+
+		$chapterName = htmlspecialchars($chapterName);
+		$chapterText = htmlspecialchars($chapterText);
+
+		if (empty($chapterName))
+			array_push($errors, 'Vous avez oublié de préciser le titre du chapitre !');
+		
+		if (empty($chapterText))
+			array_push($errors, 'Votre chapitre est vide ?');
+
+		if (count($errors) == 0)
 		{
-			extract($_GET);
-			$idChapter = strip_tags($id);
-			$deletedChap = deleteChapter($idChapter);
-			echo "Chapitre supprimé";
-		}
-	}
-	//envoi d'un nouveau chapitre
-	if (isset($_POST['btnSd_1']))
-	{
-		//vérification champs remplis
-		if (isset($_POST['chapterName'], $_POST['chapterText']))
-		{
-			extract($_POST);
-			$chapterName = strip_tags($chapterName);
-			$chapterText = strip_tags($chapterText);
-			$errors = array();
-
-			if (empty($chapterName))
-				array_push($errors, 'Vous avez oublié de préciser le titre du chapitre !');
-
-			if (empty($chapterText))
-				array_push($errors, 'Votre chapitre est vide ?');
-
-			if (count($errors) == 0)
+			//envoi d'un nouveau chapitre
+			if ($sendMode == 0)
 			{
 				$newChapter = addChapter($chapterName, $chapterText);
 				$success = 'Votre chapitre a bien été publié !!';
+			}
 
-				unset($chapterName);
-				unset($chapterText);
+			//envoi d'un chapitre édité
+			else if ($sendMode == 1)
+			{
+				$idChapter = strip_tags($id);
+				$editedChapter = updateChapter($chapterName, $chapterText, $idChapter);
+				$edited = 'Votre chapitre a bien été edité !!';
 			}
 		}
 	}
-	//envoi d'un chapitre édité
-	if (isset($_POST['btnSd_2']))
+}
+
+
+//suppression d'un chapitre
+if (isset($_POST['btnCp_2']))
+{
+	if(isset($_GET['id'])) 
 	{
-		if(isset($_GET['statusChap'])) 
-		{
-			extract($_GET);
-			$idChapter = strip_tags($statusChap);
-			$statusChap = updateChapter($chapterName, $chapterText, $idChapter);
-			$edited = 'Votre chapitre a bien été edité !!';
-		}
+		extract($_GET);
+		$idChapter = strip_tags($id);
+		$deletedChap = deleteChapter($idChapter);
+		echo "Chapitre supprimé";
 	}
-};
+}
 
 ?>
 
@@ -106,17 +112,18 @@ if(isset($_GET['id']))
 		<section>
 
 			<div id="write">
+
 				<?php
-				if (isset($success))
-					echo $success;
-				if (isset($edited))
-					echo $edited;
+					if (isset($success))
+						echo $success;
+					if (isset($edited))
+						echo $edited;
 
-				if (!empty($errors)):?>
+					if (!empty($errors)):?>
 
-					<?php foreach($errors as $error): ?>
-						<p><?= $error ?></p>
-					<?php endforeach; ?>
+						<?php foreach($errors as $error): ?>
+							<p><?= $error ?></p>
+						<?php endforeach; ?>
 
 				<?php endif; ?>
 
@@ -126,20 +133,20 @@ if(isset($_GET['id']))
 						<input type="text" name="chapterName" id="chapterName" value="<?php if (isset($_POST['btnCp_1']))
 																							{ echo  $edit->chapterName; }
 																							else if (isset($_POST['chapterName']))
-																							{ 
-																								extract($_POST);
-																								echo $chapterName; 
-																							} ?>"/>
+																							{ echo $chapterName; } ?>"/>
 					</p>
 					<p>
 						<label for="chapterText">Chapitre :</label><br/>
-						<input type="text" name="chapterText" id="chapterText" cols="30" rows="8" value="<?php if (isset($_POST['btnCp_1']))
-																												{ echo  $edit->chapterText; }
-																												else if (isset($_POST['chapterText']))
-																												{ echo $chapterText; } ?>"/>
+						<textarea name="chapterText" id="chapterText" cols="30" rows="8" ><?php if (isset($_POST['btnCp_1']))
+																								{ echo  $edit->chapterText; }
+																								else if (isset($_POST['chapterText']))
+																								{ echo $chapterText; } ?></textarea>
 					</p>
 					<div class="buttons_ panel">
-						<?php echo getButtonsSend(); ?>
+						<?php 
+							$mode = 1;
+							echo getButtonsSend($mode);
+						?>
 					</div>
 				</form>
 			</div>

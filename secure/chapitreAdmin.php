@@ -9,8 +9,20 @@ else
 
 	require_once('../config/functions.php');
 
-	$chapter = getOneChapter($id);
 	$comments = getComments($id);
+	$chapter = getOneChapter($id);
+	$textePropre = $chapter->chapterText;
+	$conv = array(
+		//tableau des symboles à convertir
+		'\[b\](.*?)\[\/b\]' => '<strong>$1</strong>',
+		'\[i\](.*?)\[\/i\]' => '<em>$1</em>',
+		'\[u\](.*?)\[\/u\]' => '<u>$1</u>'
+	);
+	foreach($conv as $o=>$c) 
+	{
+		$textePropre = preg_replace('/'.$o.'/',$c, $textePropre);
+	}
+	$textePropre = nl2br($textePropre);
 
 
 
@@ -59,25 +71,15 @@ else
 		<section>
 			<div class="preview">
 				<h1><?= $chapter->chapterName ?></h1>
-				<p>	
-					<?php
-						$textePropre = $chapter->chapterText;
-						$conv = array(
-							//tableau des symboles à convertir
-							'\[b\](.*?)\[\/b\]' => '<strong>$1</strong>',
-							'\[i\](.*?)\[\/i\]' => '<em>$1</em>',
-							'\[u\](.*?)\[\/u\]' => '<u>$1</u>'
-						);
-						foreach($conv as $o=>$c) {
-							$textePropre = preg_replace('/'.$o.'/',$c, $textePropre);
-						}
-						$textePropre = nl2br($textePropre);
-						echo $textePropre;
-					?>	
-				</p><br/>
-				<time><?= $chapter->chapterDate ?></time><br/>
+				<p><?= $textePropre; ?></p><br/>
+				<time>Chapitre publié le : <?= $chapter->chapterDate ?></time><br/>
+				<?php
+				$dateEdit = $chapter->dateEdit;
+				if ($dateEdit !== NULL)
+					echo '<time>Édité le : '.$dateEdit.'</time><br/>';
+				?>
 				<hr/>
-				<form method="post" action="admin.php?id=<?= $chapter->idChapter ?>&statusChap=<?= $chapter->idChapter ?>" >
+				<form method="post" action="admin.php?id=<?= $chapter->idChapter ?>">
 					<div class="buttons_ panel">
 						<?php echo getButtonsChap(); ?>
 					</div>

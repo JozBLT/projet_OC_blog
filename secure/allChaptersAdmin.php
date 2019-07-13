@@ -3,6 +3,7 @@
 require_once('../config/functions.php');
 
 $chapters = getChaptersInfo();
+
 ?>
 
 
@@ -28,7 +29,23 @@ $chapters = getChaptersInfo();
         		<?php foreach($chapters as $chapter): ?>
             		<div class="iconPreview">
 						<h2><?= $chapter->chapterName ?></h2>
-						<p><?= $textPreview = substr($chapter->chapterText, 0, 250) ?>...</p><br/>
+						<p>
+							<?php
+								$textePropre = $chapter->chapterText;
+								$conv = array(
+									//tableau des symboles à convertir
+									'\[b\](.*?)\[\/b\]' => '<strong>$1</strong>',
+									'\[i\](.*?)\[\/i\]' => '<em>$1</em>',
+									'\[u\](.*?)\[\/u\]' => '<u>$1</u>'
+								);
+								foreach($conv as $o=>$c) 
+								{
+									$textePropre = preg_replace('/'.$o.'/',$c, $textePropre);
+								}
+								$textePropre = nl2br($textePropre);
+						 		echo $textPreview = substr($textePropre, 0, 250);
+						 	?> ...
+						</p><br/>
 						<time><?= $chapter->chapterDate ?></time><br/>
 						<a href="chapitreAdmin.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
 					</div>

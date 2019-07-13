@@ -65,13 +65,14 @@ function updateChapter($chapterName, $chapterText,$idChapter)
 {
 	require('connect.php');
 	$req = $bdd->prepare('UPDATE chapters SET chapterName = ?, chapterText = ?, dateEdit = NOW() WHERE idChapter = ?');
-	$req->execute(array($idChapter));
+	$req->execute(array($chapterName, $chapterText,$idChapter));
 	$req->closeCursor();
 }
 
 
 
 
+//	header('location: chapitreAdmin?php?id='.$var);
 
 
 
@@ -92,7 +93,7 @@ function addComment($chapterId, $author, $comment)
 function getComments($id)
 {
 	require('connect.php');
-	$req = $bdd->prepare('SELECT * FROM comments WHERE chapterId = ?');
+	$req = $bdd->prepare('SELECT * FROM comments WHERE chapterId = ? ORDER BY date DESC');
 	$req->execute(array($id));
 	$data = $req->fetchAll(PDO::FETCH_OBJ);
 	return $data;
@@ -173,8 +174,9 @@ function getButtonsCom()
 
 
 //fonction boutons envoi de chapitre
-function getButtonsSend()
+function getButtonsSend($mode)
 {
+	$mode;
 	$btnSend = '';
 	$btnSd = array(
 	
@@ -187,5 +189,12 @@ function getButtonsSend()
 	{
 		$btnSend.='<input type="submit" value="'.$d.'" name="btnCm_'.$s.'" id="btnCm_'.$s.'"/>';
 	}
-	return $btnSend;
+	if ($mode == 1) 
+	{
+		echo '<input type="submit" value="Envoyer" name="btnCm_1" id="btnCm_1"/>';
+	}
+	else
+	{
+		return $btnSend;
+	}
 }
