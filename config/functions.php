@@ -40,7 +40,7 @@ function getOneChapter($id)
 	$req->closeCursor();
 }
 
-// fonction pour insérer un chapitre dans la BDD
+// fonction pour insérer un chapitre dans la BDD (ADMIN)
 function addChapter($chapterName, $chapterText)
 {
 	require('connect.php');
@@ -50,7 +50,7 @@ function addChapter($chapterName, $chapterText)
 	header('location: allChaptersAdmin.php');
 }
 
-// fonction pour supprimer un chapitre
+// fonction pour supprimer un chapitre (ADMIN)
 function deleteChapter($idChapter)
 {
 	require('connect.php');
@@ -62,7 +62,7 @@ function deleteChapter($idChapter)
 	header('location: allChaptersAdmin.php');
 }
 
-// fonction pour éditer un chapitre
+// fonction pour éditer un chapitre (ADMIN)
 function updateChapter($chapterName, $chapterText,$idChapter)
 {
 	require('connect.php');
@@ -92,6 +92,15 @@ function addComment($chapterId, $author, $comment)
 	$req->closeCursor();
 }
 
+// fonction pour insérer un commentaire dans la BDD (ADMIN)
+function addCommentAdmin($chapterId, $comment)
+{
+	require('connect.php');
+	$req = $bdd->prepare('INSERT into comments (chapterId, author, comment, priorityCom, date) VALUES (?, "Jean Forteroche", ?, 3, NOW())');
+	$req->execute(array($chapterId, $comment));
+	$req->closeCursor();
+}
+
 // fonction qui récupère les commentaires d'un chapitre
 function getComments($id)
 {
@@ -107,21 +116,21 @@ function getComments($id)
 function reportComment($idComment)
 {
 	require('connect.php');
-	$req =$bdd->prepare('UPDATE comments SET report = 1 WHERE idComment = ?');
+	$req =$bdd->prepare('UPDATE comments SET priorityCom = 1 WHERE idComment = ?');
 	$req->execute(array($idComment));
 	$req->closeCursor();
 }
 
-// fonction pour enlever le signalement d'un commentaire
+// fonction pour enlever le signalement d'un commentaire (ADMIN)
 function validComment($idComment)
 {
 	require('connect.php');
-	$req = $bdd->prepare('UPDATE comments SET report = 0 WHERE idComment = ?');
+	$req = $bdd->prepare('UPDATE comments SET priorityCom = 2 WHERE idComment = ?');
 	$req->execute(array($idComment));
 	$req->closeCursor();
 }
 
-// fonction pour supprimer un commentaire innadapté
+// fonction pour supprimer un commentaire innadapté (ADMIN)
 function deleteComment($idComment)
 {
 	require('connect.php');
@@ -138,7 +147,7 @@ function deleteComment($idComment)
 
 
 
-// fonction boutons chapitres
+// fonction boutons chapitres (ADMIN)
 function getButtonsChap()
 {
 	$btnChap = '';
@@ -157,14 +166,14 @@ function getButtonsChap()
 }
 
 
-//fonction boutons commentaires
+//fonction boutons commentaires (ADMIN)
 function getButtonsCom()
 {
 	$btnCom = '';
 	$btnCm = array(
 	
-		1=>'valider',
-		2=>'supprimer',
+		1=>'Valider',
+		2=>'Supprimer',
 
 	);
 	
@@ -173,31 +182,4 @@ function getButtonsCom()
 		$btnCom.='<input type="submit" value="'.$m.'" name="btnCm_'.$o.'" id="btnCm_'.$o.'"/>';
 	}
 	return $btnCom;
-}
-
-
-//fonction boutons envoi de chapitre
-function getButtonsSend($mode)
-{
-	$mode;
-	$btnSend = '';
-	$btnSd = array(
-	
-		1=>'Envoyer',
-		2=>'Éditer',
-
-	);
-	
-	while (list($s,$d)=each($btnSd)) 
-	{
-		$btnSend.='<input type="submit" value="'.$d.'" name="btnCm_'.$s.'" id="btnCm_'.$s.'"/>';
-	}
-	if ($mode == 1) 
-	{
-		echo '<input type="submit" value="Envoyer" name="btnCm_1" id="btnCm_1"/>';
-	}
-	else
-	{
-		return $btnSend;
-	}
 }

@@ -117,10 +117,7 @@ if (isset($_POST['chapterName'], $_POST['chapterText']))
 																								{ echo $chapterText; } ?></textarea>
 					</p>
 					<div class="buttons_ panel">
-						<?php 
-							$mode = 1;
-							echo getButtonsSend($mode);
-						?>
+						<?= '<input type="submit" value="Envoyer" name="btnSd_1" id="btnSd_1"/>';?>
 					</div>
 				</form>
 			</div>

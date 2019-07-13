@@ -94,13 +94,9 @@ else
 				if (isset($success))
 					echo $success;
 
-				if (!empty($errors)):?>
-
-					<?php foreach($errors as $error): ?>
-						<p><?= $error ?></p>
-					<?php endforeach; ?>
-
-				<?php endif; ?>
+				if (!empty($error))
+					echo $error;
+				?>
 
 				<h2>Commenter ce chapitre :</h2>
 
@@ -125,14 +121,21 @@ else
 					<p><?= $com->comment ?></p>
 					<div class="under">
 						<time><?= $com->date ?></time> 
-						<a href="chapitre.php?id=<?= $chapter->idChapter ?>&report=<?= $com->idComment ?>">Signaler</a><!-- Ajouter un champ VALIDÉ -->
+						<?php
+							$idChapter = $chapter->idChapter;
+							$report = $com->idComment;
+							$priority = $com->priorityCom;
+							if ($priority == 0)
+								echo "<a href='chapitre.php?id=".$idChapter."&report=".$report."'>Signaler</a>";
+						?>
 					</div>
 					<p><?php
-						$reported = $com->report;
-						if ($reported == 1) {
+						if ($priority == 1)
 							echo "commentaire signalé";
-						};
-					?></p>
+						if ($priority == 2)
+							echo "commentaire validé par l'auteur";
+						?>
+					</p>
 					<hr/>
 				<?php endforeach; ?>
 			</div>

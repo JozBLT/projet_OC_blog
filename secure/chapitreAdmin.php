@@ -62,6 +62,23 @@ else
 		echo "Commentaire supprimé";
 	}
 
+	if (!empty($_POST['comment']))
+	{
+		extract($_POST);
+		$comment = strip_tags($comment);
+
+		if (empty($comment))
+			$error = 'Ton commentaire est vide Jean..';
+
+		if (!isset($error))
+		{
+			$comment = addCommentAdmin($id, $comment);
+
+			$success = 'Ton commentaire a bien été publié';
+			unset($comment);
+		}
+	}
+
 	$comments = getComments($id);
 }
 ?>
@@ -100,6 +117,26 @@ else
 				</form>
 			</div>
 
+			<div id="comment">
+				<?php
+				if (isset($success))
+					echo $success;
+
+				if (isset($error))
+					echo $error;
+				?>
+
+				<h2>Commenter ce chapitre :</h2>
+
+				<form action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>" method="post">
+					<p>
+						<label for="comment">Commentaire :</label><br/>
+						<input type="text" name="comment" id="comment" cols="30" rows="8" value="<?php if(isset($comment)) echo $comment ?>" />
+					</p>
+					<button type="submit">Envoyer</button>
+				</form>
+			</div>
+
 			<div id="comments">
 				<h2>Commentaires</h2>
 
@@ -109,14 +146,20 @@ else
 					<time><?= $com->date ?></time>
 					<p>
 						<?php
-						$reported = $com->report;
-						if ($reported == 1)
+						$priority = $com->priorityCom;
+						if ($priority == 1)
 							echo "commentaire signalé";
+						if ($priority == 2)
+							echo "commentaire validé par l'auteur";
 						?>
 					</p>
 					<form method="post" action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&statusCom=<?= $com->idComment ?>" >
 						<div class="buttons_ panel">
-							<?php echo getButtonsCom(); ?>
+							<?php 
+							if ($priority == 2 OR $priority == 3)
+								echo '<input type="submit" value="Supprimer" name="btnCm_2" id="btnCm_2"/>';
+							else echo getButtonsCom(); 
+							?>
 						</div>
 					</form>
 					<hr/>
