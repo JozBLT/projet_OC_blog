@@ -116,8 +116,8 @@ if (isset($_POST['chapterName'], $_POST['chapterText']))
 																								else if (isset($_POST['chapterText']))
 																								{ echo $chapterText; } ?></textarea>
 					</p>
-					<div class="buttons_ panel">
-						<?= '<input type="submit" value="Envoyer" name="btnSd_1" id="btnSd_1"/>';?>
+					<div class="buttons_panel">
+						<?= '<input type="submit" value="Envoyer" name="btnSd" class="button" id="btnSd"/>';?>
 					</div>
 				</form>
 			</div>

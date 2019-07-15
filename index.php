@@ -25,9 +25,13 @@ $chapters = getChaptersInfoDesc();
         <section>
 
             <?php foreach($chapters as $chapter): ?>
+
                 <div class="preview">
-                    <h2><?= $chapter->chapterName ?></h2>
-                    <p>
+                    <a href="chapitre.php?id=<?= $chapter->idChapter ?>">
+
+                        <h2><?= $chapter->chapterName ?></h2>
+
+                        <p>
                             <?php
                                 $textePropre = $chapter->chapterText;
                                 $conv = array(
@@ -44,14 +48,26 @@ $chapters = getChaptersInfoDesc();
                                 echo $textPreview = substr($textePropre, 0, 500);
                             ?> ...
                         </p><br/>
-                    <time>Chapitre publié le : <?= $chapter->chapterDate ?></time><br/>
-                    <?php
-					$dateEdit = $chapter->dateEdit;
-					if ($dateEdit !== NULL)
-						echo '<time>Édité le : '.$dateEdit.'</time><br/>';
-					?>
-                	<a href="chapitre.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
+
+                        <time><span>Chapitre publié le :</span>  <?= $chapter->chapterDate ?>     |</time>
+
+                        <?php
+    					$dateEdit = $chapter->dateEdit;
+    					if ($dateEdit !== NULL)
+    						echo '<time><span>Édité le :</span>   '.$dateEdit.'</time><br/>';
+    					?>
+
+                        <p>
+                            <?php
+                            $id = $chapter->idChapter;
+                            $nbComments = getComments($id);
+                            echo 'Ce chapitre a été commenté : '.count($nbComments).' fois'
+                            ?>
+                        </p>
+
+                    </a>
                 </div>
+                
             <?php endforeach; ?>
             
         </section>

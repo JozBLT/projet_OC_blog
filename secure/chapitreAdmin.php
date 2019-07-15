@@ -111,7 +111,7 @@ else
 				?>
 				<hr/>
 				<form method="post">
-					<div class="buttons_ panel">
+					<div class="buttons_panel">
 						<?php echo getButtonsChap(); ?>
 					</div>
 				</form>
@@ -133,37 +133,47 @@ else
 						<label for="comment">Commentaire :</label><br/>
 						<input type="text" name="comment" id="comment" cols="30" rows="8" value="<?php if(isset($comment)) echo $comment ?>" />
 					</p>
-					<button type="submit">Envoyer</button>
+					<button type="submit" class="button" id="send_com">Envoyer</button>
 				</form>
 			</div>
 
 			<div id="comments">
+
 				<h2>Commentaires</h2>
 
 				<?php foreach($comments as $com): ?>
-					<h3><?= $com->author ?></h3>
-					<p><?= $com->comment ?></p>
-					<time><?= $com->date ?></time>
-					<p>
-						<?php
-						$priority = $com->priorityCom;
-						if ($priority == 1)
-							echo "commentaire signalé";
-						if ($priority == 2)
-							echo "commentaire validé par l'auteur";
-						?>
-					</p>
-					<form method="post" action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&statusCom=<?= $com->idComment ?>" >
-						<div class="buttons_ panel">
-							<?php 
-							if ($priority == 2 OR $priority == 3)
-								echo '<input type="submit" value="Supprimer" name="btnCm_2" id="btnCm_2"/>';
-							else echo getButtonsCom(); 
+
+					<div class="<?php if ($com->priorityCom == 3) echo 'authorCom'; ?>">
+
+						<h3><?= $com->author ?></h3>
+						<p><?= $com->comment ?></p>
+
+						<div class="under">
+							<time><?= $com->date ?> &nbsp; </time>
+
+							<?php
+							if ($com->priorityCom == 1)
+								echo "<div class='red'><i class='fas fa-exclamation-triangle'></i>&nbsp; commentaire signalé &nbsp;<i class='fas fa-exclamation-triangle'></i></div>";
+							if ($com->priorityCom == 2)
+								echo "<div class='green'>commentaire validé &nbsp;<i class='fas fa-thumbs-up'></i></div>";
 							?>
-						</div>
-					</form>
+						</div><br/>
+
+						<form method="post" action="chapitreAdmin.php?id=<?= $chapter->idChapter ?>&statusCom=<?= $com->idComment ?>" >
+							<div class="buttons_panel">
+								<?php 
+								if ($com->priorityCom == 2 OR $com->priorityCom == 3)
+									echo '<input type="submit" value="Supprimer" name="btnCm_2" class="button" id="btnCm_2"/>';
+								else echo getButtonsCom(); 
+								?>
+							</div>
+						</form>
+
+					</div>
 					<hr/>
+
 				<?php endforeach; ?>
+
 			</div>
 
 		</section>

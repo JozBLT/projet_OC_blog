@@ -109,35 +109,44 @@ else
 						<label for="comment">Commentaire :</label><br/>
 						<input type="text" name="comment" id="comment" cols="30" rows="8" value="<?php if(isset($comment)) echo $comment ?>" />
 					</p>
-					<button type="submit">Envoyer</button>
+					<button type="submit" class="button" id="send_com">Envoyer</button>
 				</form>
 			</div>
 			
 			<div id="comments">
+
 				<h2>Commentaires</h2>
 
 				<?php foreach($comments as $com): ?>
-					<h3><?= $com->author ?></h3>
-					<p><?= $com->comment ?></p>
-					<div class="under">
-						<time><?= $com->date ?></time> 
-						<?php
-							$idChapter = $chapter->idChapter;
-							$report = $com->idComment;
-							$priority = $com->priorityCom;
-							if ($priority == 0)
-								echo "<a href='chapitre.php?id=".$idChapter."&report=".$report."'>Signaler</a>";
-						?>
+
+					<div class="<?php if ($com->priorityCom == 3) echo 'authorCom'; ?>">
+						<h3><?= $com->author ?></h3>
+
+						<p>
+							<?php
+							if ($com->priorityCom == 1)
+								echo "<div class='red'><i class='fas fa-exclamation-triangle'></i>&nbsp; Ce commentaire a été signalé et va être traité &nbsp;<i class='fas fa-exclamation-triangle'></i></div>";
+							else
+								echo $com->comment; 
+							?>
+						</p>
+
+						<div class="under">
+							<time><?= $com->date ?> &nbsp; </time>
+							<p><?php if ($com->priorityCom == 2) echo "<div class='green'>commentaire validé par l'auteur &nbsp;<i class='fas fa-thumbs-up'></i></div>"; ?></p>
+							<?php
+								$idChapter = $chapter->idChapter;
+								$report = $com->idComment;
+								if ($com->priorityCom == 0)
+									echo "<a href='chapitre.php?id=".$idChapter."&report=".$report."'><button class='button' id='report'>Signaler</button></a>";
+							?>
+						</div>
+
 					</div>
-					<p><?php
-						if ($priority == 1)
-							echo "commentaire signalé";
-						if ($priority == 2)
-							echo "commentaire validé par l'auteur";
-						?>
-					</p>
 					<hr/>
+
 				<?php endforeach; ?>
+
 			</div>
 			
 		</section>

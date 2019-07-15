@@ -25,9 +25,12 @@ $chapters = getChaptersInfo();
 		<section>
 
 			<div id="previews">
+
         		<?php foreach($chapters as $chapter): ?>
-            		<div class="iconPreview">
+        			<a class="iconPreview" href="chapitre.php?id=<?= $chapter->idChapter ?>">
+
 						<h2><?= $chapter->chapterName ?></h2>
+
 						<p>
 							<?php
 								$textePropre = $chapter->chapterText;
@@ -45,10 +48,20 @@ $chapters = getChaptersInfo();
 						 		echo $textPreview = substr($textePropre, 0, 250);
 						 	?> ...
 						</p><br/>
+
 						<time><?= $chapter->chapterDate ?></time><br/>
-						<a href="chapitre.php?id=<?= $chapter->idChapter ?>">Lire la suite</a>
-					</div>
+
+						<p>
+							<?php
+							$id = $chapter->idChapter;
+							$nbComments = getComments($id);
+						 	echo '<span>Ce chapitre a été commenté : '.count($nbComments).' fois</span>'
+						 	?>
+						</p>
+
+					</a>
 				<?php endforeach; ?>
+				
 			</div>
 
 		</section>

@@ -2,6 +2,7 @@
 html
 {
 	background-color: #F2F2F2;
+	padding-right: 2%;
 }
 
 a
@@ -15,7 +16,78 @@ h1, h2
 	font-family: 'Caveat', cursive;
 }
 
+span
+{
+	text-decoration: underline;
+}
 
+/* BOUTONS ET AUTRES */
+
+.button 
+{
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #f6f6f6));
+	background:-moz-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-webkit-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-o-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:-ms-linear-gradient(top, #ffffff 5%, #f6f6f6 100%);
+	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0);
+	background-color:#ffffff;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:2px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:8px 20px;
+	text-decoration:none;
+}
+.button:hover 
+{
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f6f6f6), color-stop(1, #ffffff));
+	background:-moz-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-webkit-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-o-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:-ms-linear-gradient(top, #f6f6f6 5%, #ffffff 100%);
+	background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6f6f6', endColorstr='#ffffff',GradientType=0);
+	background-color:#f6f6f6;
+}
+.button:active 
+{
+	position:relative;
+	top:1px;
+}
+
+#report:hover
+{
+	color: #FA5858;
+}
+
+#send_com:hover
+{
+	color: #5882FA;
+}
+
+.green
+{
+	color: green;
+}
+
+.red
+{
+	color: #FA5858;
+}
+
+.authorCom
+{
+	padding: 10px;
+	background-color: #C7DFF4;
+}
 
 
 
@@ -80,10 +152,9 @@ nav a:hover
 	background-color: #FAFAFA;
 }
 
-.preview a
+.preview p
 {
-	position: relative;
-	left: 90%;
+	color: black;
 }
 
 /* allChapters */
@@ -107,6 +178,11 @@ nav a:hover
 	background-color: #FAFAFA;
 }
 
+.iconPreview p, time
+{
+	color: black;
+}
+
 
 /* Comments */
 
@@ -120,6 +196,13 @@ nav a:hover
 	background-color: #FAFAFA;
 }
 
+#comments
+{
+	width: 88%;
+	padding: 2% 5%;
+	margin: 2%;
+}
+
 .under
 {
 	display: flex;
@@ -128,12 +211,21 @@ nav a:hover
 .under a
 {
 	position: relative;
-	left: 80%;
+	top: -10px;
 }
 
-#comments
+
+/* ABOUT */
+
+#photo_author
 {
-	width: 88%;
-	padding: 2% 5%;
+	width: 30%;
 	margin: 2%;
+	float: left;
+	position: relative;
+	top: -20px;
+	left: -20px;
 }
+
+
+/* CONTACT */

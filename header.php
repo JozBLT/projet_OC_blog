@@ -7,8 +7,8 @@
         <li>
             <ul><a href="index.php"><i class="fas fa-home"></i></a></ul>
             <ul><a href="allChapters.php">Chapitres</a></ul>
-            <ul><a href="index.php?action=about">About</a></ul>
-            <ul><a href="index.php?action=contact">Contact</a></ul>
+            <ul><a href="about.php">About</a></ul>
+            <ul><a href="contact.php">Contact</a></ul>
         </li>
     </nav>
 </header>
