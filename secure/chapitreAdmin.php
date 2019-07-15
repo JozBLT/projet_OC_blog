@@ -7,7 +7,7 @@ else
 	extract($_GET);
 	$id = strip_tags($id);
 
-	require_once('../config/functions.php');
+	require_once('configAdmin/functionsAdmin.php');
 
 	$chapter = getOneChapter($id);
 	$textePropre = $chapter->chapterText;

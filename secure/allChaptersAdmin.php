@@ -1,6 +1,6 @@
 <?php
 
-require_once('../config/functions.php');
+require_once('configAdmin/functionsAdmin.php');
 
 $chapters = getChaptersInfo();
 
